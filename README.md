@@ -6,7 +6,7 @@ A NodeJS, stateful, console-based Redmine client.
 
 ## Installation & Setup
 ```shell
-npm install -g younthu/redmine-cli#master
+npm install -g younthu/Redmine-CLI#master
 ```
 Connect to your Redmine instance.
 ```shell
