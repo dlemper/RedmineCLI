@@ -109,6 +109,18 @@ program
   .action(actions.handleOpen);
 
 program
+    .command('history')
+    .option('-s, --switch <index>', 'Switch to <index> server in the history')
+    .description('List connection history, switch server.')
+    .action(actions.handleHistory);
+
+
+program
   .parse(process.argv);
+
+// (function wait () {
+//     if (!false) setTimeout(wait, 1000);
+// })();
+
 
 if (!program.args.length) program.help();

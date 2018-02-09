@@ -16,6 +16,11 @@ exports.handleProjects = function(){
   } catch(err){console.error(err)}
 }
 
+exports.handleHistory = function(options){
+
+  printer.printConnections(redmine.history(options))
+}
+
 exports.handleProject = function(identifier){
   try{
     var project = redmine.getProject(identifier);

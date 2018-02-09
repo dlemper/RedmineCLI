@@ -31,7 +31,18 @@ var put = function(path, body){
 var post = function(path, body){
   return req('POST', null, null, path, {'json': body});
 }
+exports.history = function (options) {
+  _histories = nconf.get("connectionHistory")
+  if(options.switch && _histories && _histories.length > options.switch)
+  {
+    var index = options.switch;
 
+    exports.connect(_histories[index].serverUrl, _histories[index].apiKey)
+  }
+
+
+  return _histories;
+}
 exports.connect = function(serverUrl, apiKey){
   var response = get('/users/current.json', serverUrl, apiKey);
 
@@ -46,6 +57,28 @@ exports.connect = function(serverUrl, apiKey){
 
   nconf.set('serverUrl', serverUrl);
   nconf.set('apiKey', apiKey);
+
+  // save connection history
+  connect_history = nconf.get("connectionHistory")
+  if(!connect_history)
+    connect_history = []
+
+  var found = false;
+
+  for(var _history in connect_history){
+    if(_history.serverUrl == serverUrl){
+      _history.apiKey = apiKey
+      found = true;
+    }
+  }
+
+  if(!found) {
+    connect_history[connect_history.length] = {"serverUrl": serverUrl, "apiKey": apiKey}
+  }
+
+  nconf.set("connectionHistory", connect_history)
+
+
   nconf.save();
 
   return user;

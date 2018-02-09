@@ -48,3 +48,8 @@ exports.printUser = function(user){
   var out = tmpl.renderFile('template/user.tmpl', user);
   console.log(out);
 }
+
+exports.printConnections = function (history) {
+  console.log(history)
+}
+
