@@ -65,7 +65,9 @@ exports.connect = function(serverUrl, apiKey){
 
   var found = false;
 
-  for(var _history in connect_history){
+  for(var _history_index in connect_history){
+      _history = connect_history[_history_index];
+      
     if(_history.serverUrl == serverUrl){
       _history.apiKey = apiKey
       found = true;
