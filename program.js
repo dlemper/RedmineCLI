@@ -40,12 +40,14 @@ program
   .command('issues')
   .description('Display issues.')
   .option('-p, --project <project>', 'Only display issues for the specified project.')
+  .option('-n, --per_page <page size>', 'set the page size, default is 25, it does not work yet')
   .option('-P, --priority <priority>', 'Only display issues with specified priority.')
   .option('-a, --assignee <assignee>', 'Only display issues for the specified assignee.')
   .option('-s, --status <status>', 'Only display issues with the specified status.')
   .option('-t, --tracker <tracker>', 'Only display issues for the specified tracker.')
   .option('-m, --me', 'Only display issues assigned to me.')
   .option('-o, --open', 'Only display open issues.')
+  .option('-q, --query <query id or query name>', 'search with query id or query name. you should save query in redmine web first')
   .option('-c, --closed', 'Only display closed issues.')
   .action(actions.handleIssues);
 
