@@ -66,6 +66,8 @@ program
   .option('-t, --tracker <tracker>', 'Update the tracker.')
   .option('-S, --subject <subject>', 'Update the subject.')
   .option('-d, --description <description>', 'Update the description.')
+  .option('-n, --notes <notes>', 'Add notes.')
+  .option('-p, --parent <parentId>', 'Update the parent issue ID.')
   .action(actions.handleUpdateIssue);
 
 program
@@ -77,6 +79,7 @@ program
   .option('-t, --tracker <tracker>', 'Create with tracker.')
   .option('-e, --estimated <estimatedHours>', 'Create with estimated hours.')
   .option('-d, --description <description>', 'Create with description.')
+  .option('-p, --parent <parentId>', 'Create with setting the parent issue.')
   .action(actions.handleCreateIssue);
 
 program

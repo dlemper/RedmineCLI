@@ -23,6 +23,8 @@ exports.issuesFiltersFrom = function(options){
     'assigned_to_id': options.assignee || null,
     'status_id': options.status || null,
     'query_id': options.query || null,
+    'parent_issue_id': options.parent_issue || null,
+    'notes': options.notes || null,
     'tracker_id': options.tracker || null
   };
 
