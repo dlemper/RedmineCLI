@@ -44,6 +44,7 @@ program
   .option('-a, --assignee <assignee>', 'Only display issues for the specified assignee.')
   .option('-s, --status <status>', 'Only display issues with the specified status.')
   .option('-t, --tracker <tracker>', 'Only display issues for the specified tracker.')
+  .option('-q, --query <query id or query name>', 'Search by query id or query name.')
   .option('-m, --me', 'Only display issues assigned to me.')
   .option('-o, --open', 'Only display open issues.')
   .option('-c, --closed', 'Only display closed issues.')
