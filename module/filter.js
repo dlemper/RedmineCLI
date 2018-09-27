@@ -24,6 +24,7 @@ exports.issuesFiltersFrom = function(options){
     'status_id': options.status || null,
     'query_id': options.query || null,
     'parent_issue_id': options.parent_issue || null,
+    'done_ratio': options.done_ratio || null,
     'notes': options.notes || null,
     'tracker_id': options.tracker || null
   };
