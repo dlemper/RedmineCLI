@@ -7,6 +7,7 @@ Added by {% filter bold %}{{author.name}}{% endfilter %} {{created_on|ago}}.{% i
 {% filter bold %}Priority:{% endfilter %}|{{priority.name}}|{% filter bold %}Due date:{% endfilter %}|{{due_date|default('--')}}
 {% filter bold %}Assignee:{% endfilter %}|{{assigned_to.name|default('(not assigned)')}}|{% filter bold %}Done:{% endfilter %}|{{done_ratio}}%
 {% filter bold %}Estimated time:{% endfilter %}|{{estimated_hours|default('--')}}{% if estimated_hours %} hours{% endif %}|{% filter bold %}Spent time:{% endfilter %}|{{spent_hours|default('--')}}{% if spent_hours %} hour(s){% endif %}
+{% filter bold %}Parent ID:{% endfilter %}|{{parent.id|default('(no parent)')}}
 {% endfilter %}
 
 {% filter heading %}DESCRIPTION{% endfilter %}
@@ -16,8 +17,11 @@ Added by {% filter bold %}{{author.name}}{% endfilter %} {{created_on|ago}}.{% i
 {% filter heading %}History{% endfilter %}
 {% for journal in journals %}
  * Updated by {{journal.user.name}} {{journal.created_on|ago}}.
+ {%- if journal.notes %}
+   Note: {{journal.notes}}
+ {% endif -%}
    {% for detail in journal.details -%}
    {{detail.name}} changed from '{{detail.old_value}}' to '{{detail.new_value}}'.
    {% endfor -%}
 {% endfor -%}
-{% else -%}
+{% endif -%}
