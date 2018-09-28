@@ -177,6 +177,7 @@ exports.updateIssue = function(id, options){
     if(options.description) issue.issue.description = options.description;
     if(options.notes) issue.issue.notes = options.notes;
     if(options.done_ratio) issue.issue.done_ratio = options.done_ratio;
+    if(options.parent_issue) issue.issue.parent_issue_id = options.parent_issue;
 
     var response = put('/issues/' + id + '.json', issue);
     if(response.statusCode != 200)
@@ -199,6 +200,7 @@ exports.createIssue = function(project, subject, options){
     if(options.tracker)
       issue.issue.tracker_id = exports.getTrackerIdByName(options.tracker);
     if(options.description) issue.issue.description = options.description;
+    if(options.parent_issue) issue.issue.parent_issue_id = options.parent_issue;
 
     var response = post('/issues.json', issue);
 
