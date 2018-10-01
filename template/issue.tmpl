@@ -16,10 +16,8 @@ Added by {% filter bold %}{{author.name}}{% endfilter %} {{created_on|ago}}.{% i
 {%- if journals.length > 0 %}
 {% filter heading %}History{% endfilter %}
 {% for journal in journals %}
- * Updated by {{journal.user.name}} {{journal.created_on|ago}}.
-   {%- if journal.notes %}Note: {{journal.notes}}{% endif -%}
-   {% for detail in journal.details -%}
-   {{detail.name}} changed from '{{detail.old_value}}' to '{{detail.new_value}}'.
-   {% endfor -%}
+{%- if journal.notes %}* {{journal.user.name}}: {{journal.notes}}
+{% else %}{% for detail in journal.details -%} * {{journal.user.name }}: changed {{detail.name}}
+{% endfor -%}{% endif -%}
 {% endfor -%}
 {% endif -%}
