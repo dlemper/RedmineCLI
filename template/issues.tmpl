@@ -1,5 +1,6 @@
-{% filter table(['ID', 'TRACKER', 'STATUS', 'PRIORITY', 'ASSIGNEE', 'SUBJECT']) -%}
+{% set branch = RegExp('(?:branch: )(.*)', 'gi') %}
+{% filter table(['ID', 'TRACKER', 'STATUS', 'PRIORITY', 'BRANCH', 'SUBJECT']) -%}
 {% for issue in issues -%}
-#{{issue.id}}|{{issue.tracker.name}}|{{issue.status.name}}|{{issue.priority.name}}|{{issue.assigned_to.name|default('(not assigned)')}}|{{issue.subject}}
+{{issue.id}}|{{issue.tracker.name}}|{{issue.status.name.substring(0,7)}}|{{issue.priority.name}}|{% set b = branch.exec(issue.description) %}{%- if b %}{{b[1]}}{% endif -%}|{{issue.subject}}
 {% endfor -%}
 {% endfilter -%}

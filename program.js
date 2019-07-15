@@ -45,6 +45,7 @@ program
   .option('-a, --assignee <assignee>', 'Only display issues for the specified assignee.')
   .option('-s, --status <status>', 'Only display issues with the specified status.')
   .option('-t, --tracker <tracker>', 'Only display issues for the specified tracker.')
+  .option('-q, --query <query id or query name>', 'Search by query id or query name.')
   .option('-m, --me', 'Only display issues assigned to me.')
   .option('-o, --open', 'Only display open issues.')
   .option('-q, --query <query id or query name>', 'search with query id or query name. you should save query in redmine web first')
@@ -63,10 +64,13 @@ program
   .option('-P, --priority <priority>', 'Update the priority.')
   .option('-a, --assignee <userId>', 'Update the assignee.')
   .option('-s, --status <status>', 'Update the status.')
+  .option('-r, --done_ratio <1-100>', 'Update the percentage completed')
   .option('-e, --estimated <estimatedHours>', 'Update the estimated hours.')
   .option('-t, --tracker <tracker>', 'Update the tracker.')
   .option('-S, --subject <subject>', 'Update the subject.')
   .option('-d, --description <description>', 'Update the description.')
+  .option('-n, --notes <notes>', 'Add notes.')
+  .option('-p, --parent_issue <parentId>', 'Update the parent issue ID.')
   .action(actions.handleUpdateIssue);
 
 program
@@ -78,6 +82,7 @@ program
   .option('-t, --tracker <tracker>', 'Create with tracker.')
   .option('-e, --estimated <estimatedHours>', 'Create with estimated hours.')
   .option('-d, --description <description>', 'Create with description.')
+  .option('-p, --parent_issue <parentId>', 'Create with setting the parent issue.')
   .action(actions.handleCreateIssue);
 
 program

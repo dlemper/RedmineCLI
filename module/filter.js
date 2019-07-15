@@ -22,8 +22,11 @@ exports.issuesFiltersFrom = function(options){
     'priority_id': options.priority || null,
     'assigned_to_id': options.assignee || null,
     'status_id': options.status || null,
-    'query_id': options.query || null,
+    'query_id': options.query || null, 
     'per_page': options.per_page || null,
+    'parent_issue_id': options.parent_issue || null,
+    'done_ratio': options.done_ratio || null,
+    'notes': options.notes || null,
     'tracker_id': options.tracker || null
   };
 
