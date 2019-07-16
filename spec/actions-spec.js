@@ -1,6 +1,6 @@
 describe('actions.js', function() {
   var rewire = require("rewire");
-  var actions = rewire("../module/actions.js");
+  var actions = rewire("../lib/actions.js");
 
   var redmine = actions.__get__('redmine');
   var printer = actions.__get__('printer');

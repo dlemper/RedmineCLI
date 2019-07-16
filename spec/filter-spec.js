@@ -1,6 +1,6 @@
 describe('filter.js', function() {
   var rewire = require("rewire");
-  var filter = rewire("../module/filter.js");
+  var filter = rewire("../lib/filter.js");
 
   var redmine = filter.__get__('redmine');
 

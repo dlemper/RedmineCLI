@@ -1,6 +1,6 @@
 describe('filter.js', function() {
   var rewire = require("rewire");
-  var resolver = rewire("../module/resolver.js");
+  var resolver = rewire("../lib/resolver.js");
 
   var redmine = resolver.__get__('redmine');
 

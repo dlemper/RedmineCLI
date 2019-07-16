@@ -1,6 +1,6 @@
 describe('printer.js', function() {
   var rewire = require("rewire");
-  var printer = rewire("../module/printer.js");
+  var printer = rewire("../lib/printer.js");
 
   var tmpl = printer.__get__('tmpl');
 

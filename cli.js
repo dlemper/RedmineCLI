@@ -1,5 +1,5 @@
 var program = require('commander');
-var actions = require('./module/actions.js');
+var actions = require('./lib/actions.js');
 var package = require('./package.json');
 
 program

@@ -7,9 +7,14 @@
     "bin": "bin",
     "spec": "spec"
   },
+  "main": "cli.js",
+  "bin": {
+    "redmine": "cli.js"
+  },
   "devDependencies": {
     "istanbul": "^0.4.5",
     "jasmine-node": "^3.0.0",
+    "pkg": "^4.4.0",
     "rewire": "^4.0.1"
   },
   "dependencies": {
@@ -24,7 +29,7 @@
   },
   "scripts": {
     "test": "istanbul cover jasmine-node --captureExceptions spec/",
-    "build": "pkg --out-path=dist redmine.js"
+    "build": "pkg --out-path=dist ."
   },
   "repository": {
     "type": "git",

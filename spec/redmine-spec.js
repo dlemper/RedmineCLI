@@ -1,6 +1,6 @@
 describe('redmine.js', function() {
   var rewire = require("rewire");
-  var redmine = rewire("../module/redmine.js");
+  var redmine = rewire("../lib/redmine.js");
 
   it("should throw when not connected", function() {
     var nconf = redmine.__get__('nconf');
@@ -457,7 +457,7 @@ describe('redmine.js', function() {
   });
 
   describe('throws (on error in response)', function(){
-    var redmine = rewire("../module/redmine.js")
+    var redmine = rewire("../lib/redmine.js")
 
     //before all
     var response = { getBody : function(){return undefined;}};
