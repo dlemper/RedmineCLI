@@ -8,7 +8,7 @@ describe('template-engine.js', function() {
     var file = 'file';
     var data = {data: {}};
 
-    spyOn(swig, 'renderFile').andReturn('out');
+    jest.spyOn(swig, 'renderFile').mockReturnValue('out');
 
     var out = tmpl.renderFile(file, data);
     file = __dirname.substring(0, __dirname.length - 4) + 'lib/../' + file;

@@ -25,10 +25,10 @@ describe('filter.js', function() {
     var fakeUsers = {users: [{id: 1, firstname: 'First1', lastname: 'Last1'},
                              {id: 2, firstname: 'First2', lastname: 'Last2'}]};
 
-    spyOn(redmine, 'getStatuses').andReturn(fakeStatuses);
-    spyOn(redmine, 'getTrackers').andReturn(fakeTrackers);
-    spyOn(redmine, 'getPriorities').andReturn(fakePriorities);
-    spyOn(redmine, 'getUsers').andReturn(fakeUsers);
+    jest.spyOn(redmine, 'getStatuses').mockReturnValue(fakeStatuses);
+    jest.spyOn(redmine, 'getTrackers').mockReturnValue(fakeTrackers);
+    jest.spyOn(redmine, 'getPriorities').mockReturnValue(fakePriorities);
+    jest.spyOn(redmine, 'getUsers').mockReturnValue(fakeUsers);
 
     resolver.resolveHistoryIdsToNames(issue);
     var expected = issue;

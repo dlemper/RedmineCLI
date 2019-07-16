@@ -1,13 +1,11 @@
 describe('printer.js', function() {
-  var rewire = require("rewire");
-  var printer = rewire("../lib/printer.js");
-
-  var tmpl = printer.__get__('tmpl');
+  const printer = require("../lib/printer.js");
+  const tmpl = require('../lib/template-engine.js');
 
   it("should print successfully connected", function() {
-    var user = {login: 'login'};
+    const user = { login: 'login' };
 
-    spyOn(console, 'log');
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printSuccessfullyConnected('url', user)
 
@@ -15,11 +13,11 @@ describe('printer.js', function() {
   });
 
   it("should print projects", function() {
-    var projects = {projects: []};
-    var out = 'output';
+    const projects = { projects: [] };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printProjects(projects);
 
@@ -28,11 +26,11 @@ describe('printer.js', function() {
   });
 
   it("should print project", function() {
-    var project = {project: {}};
-    var out = 'output';
+    const project = { project: {} };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printProject(project);
 
@@ -41,11 +39,11 @@ describe('printer.js', function() {
   });
 
   it("should print issues", function() {
-    var issues = {issues: []};
-    var out = 'output';
+    const issues = { issues: [] };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printIssues(issues);
 
@@ -54,11 +52,11 @@ describe('printer.js', function() {
   });
 
   it("should print issue", function() {
-    var issue = {issue: {}};
-    var out = 'output';
+    const issue = { issue: {} };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printIssue(issue);
 
@@ -67,11 +65,11 @@ describe('printer.js', function() {
   });
 
   it("should print statuses", function() {
-    var statuses = {statuses: []};
-    var out = 'output';
+    const statuses = { statuses: [] };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printStatuses(statuses);
 
@@ -80,11 +78,11 @@ describe('printer.js', function() {
   });
 
   it("should print trackers", function() {
-    var trackers = {trackers: []};
-    var out = 'output';
+    const trackers = { trackers: [] };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printTrackers(trackers);
 
@@ -93,11 +91,11 @@ describe('printer.js', function() {
   });
 
   it("should print priorities", function() {
-    var priorities = {priorities: []};
-    var out = 'output';
+    const priorities = { priorities: [] };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printPriorities(priorities);
 
@@ -106,11 +104,11 @@ describe('printer.js', function() {
   });
 
   it("should print users", function() {
-    var users = {users: []};
-    var out = 'output';
+    const users = { users: [] };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printUsers(users);
 
@@ -119,11 +117,11 @@ describe('printer.js', function() {
   });
 
   it("should print user", function() {
-    var user = {user: {}};
-    var out = 'output';
+    const user = { user: {} };
+    const out = 'output';
 
-    spyOn(tmpl, 'renderFile').andReturn(out);
-    spyOn(console, 'log');
+    jest.spyOn(tmpl, 'renderFile').mockReturnValue(out);
+    jest.spyOn(console, 'log').mockImplementation(() => {});
 
     printer.printUser(user);
 

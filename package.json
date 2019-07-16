@@ -29,7 +29,7 @@
     "sync-request": "^6.1.0"
   },
   "scripts": {
-    "test": "istanbul cover jasmine-node --captureExceptions spec/",
+    "test": "jest --coverage",
     "build": "pkg --out-path=dist ."
   },
   "repository": {

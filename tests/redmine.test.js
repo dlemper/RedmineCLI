@@ -1,10 +1,9 @@
 describe('redmine.js', function() {
-  var rewire = require("rewire");
-  var redmine = rewire("../lib/redmine.js");
+  var redmine = require("../lib/redmine.js");
 
   it("should throw when not connected", function() {
-    var nconf = redmine.__get__('nconf');
-    spyOn(nconf, 'get').andReturn(null);
+    const nconf = require('nconf');
+    jest.spyOn(nconf, 'get').mockReturnValue(null);
 
     var throwWhenNotConnected = redmine.__get__('throwWhenNotConnected');
 
@@ -53,7 +52,7 @@ describe('redmine.js', function() {
     redmine.__set__('get', function(){return response;});
 
     var nconf = redmine.__get__('nconf');
-    spyOn(nconf, 'save');
+    jest.spyOn(nconf, 'save').mockImplementation(() => {});
 
     var actual = redmine.connect('url', 'apiKey');
     var expected = user.user;
@@ -93,8 +92,8 @@ describe('redmine.js', function() {
   });
 
   it("should update project", function() {
-    var put = jasmine.createSpy('post');
-    put.andReturn({statusCode:200});
+    var put = jest.fn();
+    put.mockReturnValue({statusCode:200});
     redmine.__set__('put', put);
 
     var options = {
@@ -105,8 +104,8 @@ describe('redmine.js', function() {
   });
 
   it("should update project and throw error", function() {
-    var put = jasmine.createSpy('post');
-    put.andReturn({statusCode:500});
+    var put = jest.fn();
+    put.mockReturnValue({statusCode:500});
     redmine.__set__('put', put);
 
     var options = {};
@@ -117,8 +116,8 @@ describe('redmine.js', function() {
 
   it("should create project", function() {
     var project = {project:{identifier:'project'}};
-    var post = jasmine.createSpy('post');
-    post.andReturn({statusCode:201,
+    var post = jest.fn();
+    post.mockReturnValue({statusCode:201,
                     getBody: function(){return JSON.stringify(project)}});
     redmine.__set__('post', post);
 
@@ -133,8 +132,8 @@ describe('redmine.js', function() {
   });
 
   it("should create project and throw error", function() {
-    var post = jasmine.createSpy('post');
-    post.andReturn({statusCode:500});
+    var post = jest.fn();
+    post.mockReturnValue({statusCode:500});
     redmine.__set__('post', post);
 
     var options = {};
@@ -196,13 +195,13 @@ describe('redmine.js', function() {
   });
 
   it("should update issue", function() {
-    var put = jasmine.createSpy('put');
-    put.andReturn({statusCode:200});
+    var put = jest.fn();
+    put.mockReturnValue({statusCode:200});
     redmine.__set__('put', put);
 
-    spyOn(redmine, 'getPriorityIdByName').andReturn(1);
-    spyOn(redmine, 'getStatusIdByName').andReturn(1);
-    spyOn(redmine, 'getTrackerIdByName').andReturn(1);
+    jest.spyOn(redmine, 'getPriorityIdByName').mockReturnValue(1);
+    jest.spyOn(redmine, 'getStatusIdByName').mockReturnValue(1);
+    jest.spyOn(redmine, 'getTrackerIdByName').mockReturnValue(1);
 
     var options = {
       priority: 'High', status: 'New', tracker: 'Bug', assignee: 1,
@@ -215,8 +214,8 @@ describe('redmine.js', function() {
   });
 
   it("should update issue and throw error", function() {
-    var put = jasmine.createSpy('put');
-    put.andReturn({statusCode:500});
+    var put = jest.fn();
+    put.mockReturnValue({statusCode:500});
     redmine.__set__('put', put);
 
     var options = {};
@@ -227,14 +226,14 @@ describe('redmine.js', function() {
 
   it("should create issue", function() {
     var issue = {issue:{id:1}};
-    var post = jasmine.createSpy('post');
-    post.andReturn({statusCode:201,
+    var post = jest.fn();
+    post.mockReturnValue({statusCode:201,
                     getBody: function(){return JSON.stringify(issue)}});
     redmine.__set__('post', post);
 
-    spyOn(redmine, 'getPriorityIdByName').andReturn(1);
-    spyOn(redmine, 'getStatusIdByName').andReturn(1);
-    spyOn(redmine, 'getTrackerIdByName').andReturn(1);
+    jest.spyOn(redmine, 'getPriorityIdByName').mockReturnValue(1);
+    jest.spyOn(redmine, 'getStatusIdByName').mockReturnValue(1);
+    jest.spyOn(redmine, 'getTrackerIdByName').mockReturnValue(1);
 
     var options = {
       priority: 'High', status: 'New', tracker: 'Bug',
@@ -248,8 +247,8 @@ describe('redmine.js', function() {
   });
 
   it("should create issue and warn on 404", function() {
-    var post = jasmine.createSpy('post');
-    post.andReturn({statusCode:404});
+    var post = jest.fn();
+    post.mockReturnValue({statusCode:404});
     redmine.__set__('post', post);
 
     var options = {};
@@ -259,8 +258,8 @@ describe('redmine.js', function() {
   });
 
   it("should create issue and throw error", function() {
-    var post = jasmine.createSpy('post');
-    post.andReturn({statusCode:500});
+    var post = jest.fn();
+    post.mockReturnValue({statusCode:500});
     redmine.__set__('post', post);
 
     var options = {};
@@ -283,7 +282,7 @@ describe('redmine.js', function() {
 
   it("should get status id by name", function() {
     var statuses = {issue_statuses: [{id:1, name: 'name'}]};
-    spyOn(redmine, 'getStatuses').andReturn(statuses);
+    jest.spyOn(redmine, 'getStatuses').mockReturnValue(statuses);
 
     var actual = redmine.getStatusIdByName('name');
     var expected = 1;
@@ -293,7 +292,7 @@ describe('redmine.js', function() {
 
   it("should get status name by id", function() {
     var statuses = {issue_statuses: [{id:1, name: 'name'}]};
-    spyOn(redmine, 'getStatuses').andReturn(statuses);
+    jest.spyOn(redmine, 'getStatuses').mockReturnValue(statuses);
 
     var actual = redmine.getStatusNameById(1);
     var expected = 'name';
@@ -314,7 +313,7 @@ describe('redmine.js', function() {
 
   it("should get tracker id by name", function() {
     var trackers = {trackers: [{id:1, name: 'name'}]};
-    spyOn(redmine, 'getTrackers').andReturn(trackers);
+    jest.spyOn(redmine, 'getTrackers').mockReturnValue(trackers);
 
     var actual = redmine.getTrackerIdByName('name');
     var expected = 1;
@@ -324,7 +323,7 @@ describe('redmine.js', function() {
 
   it("should get tracker name by id", function() {
     var trackers = {trackers: [{id:1, name: 'name'}]};
-    spyOn(redmine, 'getTrackers').andReturn(trackers);
+    jest.spyOn(redmine, 'getTrackers').mockReturnValue(trackers);
 
     var actual = redmine.getTrackerNameById(1);
     var expected = 'name';
@@ -345,7 +344,7 @@ describe('redmine.js', function() {
 
   it("should get priority id by name", function() {
     var priorities = {issue_priorities: [{id:1, name: 'name'}]};
-    spyOn(redmine, 'getPriorities').andReturn(priorities);
+    jest.spyOn(redmine, 'getPriorities').mockReturnValue(priorities);
 
     var actual = redmine.getPriorityIdByName('name');
     var expected = 1;
@@ -355,7 +354,7 @@ describe('redmine.js', function() {
 
   it("should get priority name by id", function() {
     var priorities = {issue_priorities: [{id:1, name: 'name'}]};
-    spyOn(redmine, 'getPriorities').andReturn(priorities);
+    jest.spyOn(redmine, 'getPriorities').mockReturnValue(priorities);
 
     var actual = redmine.getPriorityNameById(1);
     var expected = 'name';
@@ -387,7 +386,7 @@ describe('redmine.js', function() {
 
   it("should get assignee name by id", function() {
     var users = {users: [{id:1, firstname: 'first', lastname: 'last'}]};
-    spyOn(redmine, 'getUsers').andReturn(users);
+    jest.spyOn(redmine, 'getUsers').mockReturnValue(users);
 
     var actual = redmine.getAssigneeNameById(1);
     var expected = 'first last';
@@ -396,11 +395,11 @@ describe('redmine.js', function() {
   });
 
   it("should open url in browser", function() {
-    var openInBrowser = jasmine.createSpy();
+    var openInBrowser = jest.fn();
     redmine.__set__('openInBrowser', openInBrowser);
 
     var nconf = redmine.__get__('nconf');
-    spyOn(nconf, 'get').andReturn('url');
+    jest.spyOn(nconf, 'get').mockReturnValue('url');
 
     redmine.open(1);
 
@@ -409,49 +408,49 @@ describe('redmine.js', function() {
 
   it('could not resolve status id by name', function(){
     var statuses = {issue_statuses: []};
-    spyOn(redmine, 'getStatuses').andReturn(statuses);
+    jest.spyOn(redmine, 'getStatuses').mockReturnValue(statuses);
     expect(redmine.getStatusIdByName.bind(this, 'name'))
       .toThrow('\'name\' is no valid status.');
   });
 
   it('could not resolve tracker id by name', function(){
     var trackers = {trackers: []};
-    spyOn(redmine, 'getTrackers').andReturn(trackers);
+    jest.spyOn(redmine, 'getTrackers').mockReturnValue(trackers);
     expect(redmine.getTrackerIdByName.bind(this, 'name'))
       .toThrow('\'name\' is no valid tracker.');
   });
 
   it('could not resolve priority id by name', function(){
     var priorities = {issue_priorities: []};
-    spyOn(redmine, 'getPriorities').andReturn(priorities);
+    jest.spyOn(redmine, 'getPriorities').mockReturnValue(priorities);
     expect(redmine.getPriorityIdByName.bind(this, 'name'))
       .toThrow('\'name\' is no valid priority.');
   });
 
   it('could not resolve status name by id', function(){
     var statuses = {issue_statuses: []};
-    spyOn(redmine, 'getStatuses').andReturn(statuses);
+    jest.spyOn(redmine, 'getStatuses').mockReturnValue(statuses);
     expect(redmine.getStatusNameById.bind(this, 1))
       .toThrow('\'1\' is no valid status id.');
   });
 
   it('could not resolve tracker name by id', function(){
     var trackers = {trackers: []};
-    spyOn(redmine, 'getTrackers').andReturn(trackers);
+    jest.spyOn(redmine, 'getTrackers').mockReturnValue(trackers);
     expect(redmine.getTrackerNameById.bind(this, 1))
       .toThrow('\'1\' is no valid tracker id.');
   });
 
   it('could not resolve priority name by id', function(){
     var priorities = {issue_priorities: []};
-    spyOn(redmine, 'getPriorities').andReturn(priorities);
+    jest.spyOn(redmine, 'getPriorities').mockReturnValue(priorities);
     expect(redmine.getPriorityNameById.bind(this, 1))
       .toThrow('\'1\' is no valid priority id.');
   });
 
   it('could not resolve assignee name by id', function(){
     var users = {users: []};
-    spyOn(redmine, 'getUsers').andReturn(users);
+    jest.spyOn(redmine, 'getUsers').mockReturnValue(users);
     expect(redmine.getAssigneeNameById.bind(this, 1))
       .toThrow('\'1\' is no valid assignee id.');
   });
