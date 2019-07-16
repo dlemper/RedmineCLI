@@ -1,30 +1,30 @@
 {
   "name": "redmine-cli",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "A NodeJS Redmine client.",
   "preferGlobal": "true",
   "directories": {
     "bin": "bin",
-    "test": "test"
+    "spec": "spec"
   },
   "devDependencies": {
-    "coveralls": "^2.11.2",
-    "istanbul": "^0.3.13",
-    "jasmine-node": "^1.14.5",
-    "rewire": "^2.3.1"
+    "istanbul": "^0.4.5",
+    "jasmine-node": "^3.0.0",
+    "rewire": "^4.0.1"
   },
   "dependencies": {
     "cli-table": "^0.3.1",
     "colors": "^1.0.3",
     "commander": "^2.7.1",
     "moment": "^2.9.0",
-    "nconf": "^0.7.1",
-    "open": "0.0.5",
+    "nconf": "^0.10.0",
+    "open": "^6.4.0",
     "swig": "^1.4.2",
-    "sync-request": "^2.0.1"
+    "sync-request": "^6.1.0"
   },
   "scripts": {
-    "test": "istanbul cover jasmine-node --captureExceptions spec/ && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "test": "istanbul cover jasmine-node --captureExceptions spec/",
+    "build": "pkg --out-path=dist redmine.js"
   },
   "repository": {
     "type": "git",
