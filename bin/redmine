@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('../program.js');
+require('../redmine.js');
