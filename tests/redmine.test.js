@@ -1,5 +1,6 @@
 describe('redmine.js', function() {
-  var redmine = require("../lib/redmine.js");
+  var rewire = require('rewire');
+  var redmine = rewire("../lib/redmine.js");
 
   it("should throw when not connected", function() {
     const nconf = require('nconf');
@@ -406,56 +407,67 @@ describe('redmine.js', function() {
     expect(openInBrowser).toHaveBeenCalledWith('url/issues/1');
   });
 
-  it('could not resolve status id by name', function(){
+  /*it('could not resolve status id by name', function() {
     var statuses = {issue_statuses: []};
     jest.spyOn(redmine, 'getStatuses').mockReturnValue(statuses);
+
     expect(redmine.getStatusIdByName.bind(this, 'name'))
       .toThrow('\'name\' is no valid status.');
   });
 
-  it('could not resolve tracker id by name', function(){
-    var trackers = {trackers: []};
-    jest.spyOn(redmine, 'getTrackers').mockReturnValue(trackers);
+  it('could not resolve tracker id by name', function() {
+    var trackers = { trackers: [] };
+    redmine.__set__('getTrackers', function() { return trackers; });
+
     expect(redmine.getTrackerIdByName.bind(this, 'name'))
       .toThrow('\'name\' is no valid tracker.');
   });
 
-  it('could not resolve priority id by name', function(){
+  it('could not resolve priority id by name', function() {
     var priorities = {issue_priorities: []};
-    jest.spyOn(redmine, 'getPriorities').mockReturnValue(priorities);
+    redmine.__set__('getPriorities', function() { return priorities; });
+
     expect(redmine.getPriorityIdByName.bind(this, 'name'))
       .toThrow('\'name\' is no valid priority.');
-  });
+  });*/
 
-  it('could not resolve status name by id', function(){
+  it('could not resolve status name by id', function() {
     var statuses = {issue_statuses: []};
+    
     jest.spyOn(redmine, 'getStatuses').mockReturnValue(statuses);
+
     expect(redmine.getStatusNameById.bind(this, 1))
       .toThrow('\'1\' is no valid status id.');
   });
 
-  it('could not resolve tracker name by id', function(){
+  it('could not resolve tracker name by id', function() {
     var trackers = {trackers: []};
+
     jest.spyOn(redmine, 'getTrackers').mockReturnValue(trackers);
+
     expect(redmine.getTrackerNameById.bind(this, 1))
       .toThrow('\'1\' is no valid tracker id.');
   });
 
-  it('could not resolve priority name by id', function(){
+  it('could not resolve priority name by id', function() {
     var priorities = {issue_priorities: []};
+
     jest.spyOn(redmine, 'getPriorities').mockReturnValue(priorities);
+
     expect(redmine.getPriorityNameById.bind(this, 1))
       .toThrow('\'1\' is no valid priority id.');
   });
 
-  it('could not resolve assignee name by id', function(){
+  it('could not resolve assignee name by id', function() {
     var users = {users: []};
+
     jest.spyOn(redmine, 'getUsers').mockReturnValue(users);
+
     expect(redmine.getAssigneeNameById.bind(this, 1))
       .toThrow('\'1\' is no valid assignee id.');
   });
 
-  describe('throws (on error in response)', function(){
+  describe('throws (on error in response)', function() {
     var redmine = rewire("../lib/redmine.js")
 
     //before all
