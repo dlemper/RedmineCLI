@@ -11,7 +11,7 @@ describe('template-engine.js', function() {
     jest.spyOn(swig, 'renderFile').mockReturnValue('out');
 
     var out = tmpl.renderFile(file, data);
-    file = __dirname.substring(0, __dirname.length - 4) + 'lib/../' + file;
+    file = __dirname.substring(0, __dirname.length - 5) + 'lib/../' + file;
 
     expect(swig.renderFile).toHaveBeenCalledWith(file, data);
     expect(out).toEqual(out);
