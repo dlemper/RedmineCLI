@@ -14,18 +14,18 @@
   "devDependencies": {
     "istanbul": "^0.4.5",
     "jasmine-node": "^3.0.0",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "pkg": "^4.4.0",
     "rewire": "^4.0.1"
   },
   "dependencies": {
     "cli-table": "^0.3.1",
-    "colors": "^1.0.3",
-    "commander": "^2.7.1",
+    "colors": "^1.4.0",
+    "commander": "^2.20.3",
     "fs-extra": "^8.1.0",
     "moment": "^2.9.0",
     "nconf": "^0.10.0",
-    "open": "^6.4.0",
+    "open": "^7.0.0",
     "swig": "^1.4.2",
     "sync-request": "^6.1.0",
     "then-request": "^6.0.2"
