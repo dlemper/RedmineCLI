@@ -15,7 +15,7 @@
     "istanbul": "^0.4.5",
     "jasmine-node": "^3.0.0",
     "jest": "^24.9.0",
-    "pkg": "^4.4.0",
+    "pkg": "^4.4.2",
     "rewire": "^4.0.1"
   },
   "dependencies": {
